@@ -1,7 +1,32 @@
-﻿@page "/"
+﻿@using Microsoft.EntityFrameworkCore
+@using KSheet3.Data
+@page "/"
+@inject IDbContextFactory<CallContext> CallContextFactory
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Call Entry</PageTitle>
 
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
+@if(ShowCreate)
+{
+	<h3>Add a new call</h3>
+	<div class="row">
+		<label for="Position" class="col-4 col-form-label">Position</label>
+		<div class="col-8">
+			<input id="Position" name="Position" type="number" class="form-control" @bind="@NewCall.Position">
+		</div>
+	</div>
+	
+	<div class="row">
+		<label for="Address" class="col-4 col-form-label">Address</label>
+		<div class"col-8">
+			<input id="Address" name="Address" type="text" class="form-control" @bind="NewCall.Address">
+		</div>
+	</div>
+}
+else
+{
+	<div class="form-group row">
+		<div class="offset-4 col-8">
+			<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCreateForm">Add a New Call</button>
+		</div>
+	</div>
+}

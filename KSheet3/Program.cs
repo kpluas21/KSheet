@@ -11,7 +11,8 @@ var connectionString = builder.Configuration.GetConnectionString("CallsDB");
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddDbContextFactory<CallContext>(options => options.UseSqlite(connectionString));
+builder.Services.AddDbContextFactory<CallContext>
+	(options => options.UseSqlite(connectionString));
 
 var app = builder.Build();
 
