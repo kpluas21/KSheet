@@ -50,5 +50,21 @@ namespace KSheet3.Components.Pages
 				await _context.DisposeAsync();
 			}
 		}
+
+		//Shows only a handful of calls when requested
+		public async Task ShowSomeCalls()
+		{
+			_context ??= await CallContextFactory.CreateDbContextAsync();
+
+			if(_context != null)
+			{
+				AllCalls = await _context.Calls.Take<Call>(20).ToListAsync();
+			}
+
+			if(_context != null)
+			{
+				await _context.DisposeAsync();
+			}
+		}
 	}
 }

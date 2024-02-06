@@ -61,7 +61,7 @@ else
 	{
 		<div class="table-responsive">
 			<table class="table table-striped table-hover table-bordered table-light border-dark">
-				<thread>
+				<thead>
 					<tr>
 						<th scope="col">Id</th>
 						<th scope="col">Position</th>
@@ -70,19 +70,20 @@ else
 						<th scope="col">Fire Signal</th>
 						<th scope="col">Notes</th>
 					</tr>
-				</thread>
-			<tbody>
-			@foreach (var call in @AllCalls)
-				{
-					<tr>
-						<th scope="row">@call.Id</th>
-						<td>@call.Position</td>
-						<td>@call.Address</td>
-						<td>@call.PdSignal</td>
-						<td>@call.FdSignal</td>
-						<td>@call.Notes</td>
-					</tr>
-				}
+				</thead>
+				<tbody>
+
+					@foreach (var call in @AllCalls)
+					{
+						<tr>
+							<th scope="row">@call.Id</th>
+							<td>@call.Position</td>
+							<td>@call.Address</td>
+							<td>@call.PdSignal</td>
+							<td>@call.FdSignal</td>
+							<td>@call.Notes</td>
+						</tr>
+					}
 				</tbody>
 			</table>
 		</div>
