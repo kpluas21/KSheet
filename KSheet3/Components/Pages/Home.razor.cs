@@ -9,6 +9,7 @@ namespace KSheet3.Components.Pages
 	{
 		public bool ShowCreate { get; set; }
 		public Call? NewCall { get; set; }
+		public List<Call>? AllCalls { get; set; }
 		private CallContext? _context;
 
 		protected override async Task OnInitializedAsync()
@@ -22,6 +23,7 @@ namespace KSheet3.Components.Pages
 			NewCall = new Call();
 		}
 
+		//CREATE
 		public async Task CreateNewCall()
 		{
 			_context ??= await CallContextFactory.CreateDbContextAsync();
@@ -32,6 +34,21 @@ namespace KSheet3.Components.Pages
 
 			}
 			ShowCreate = false;
+			await ShowCalls();
+		}
+		//READ
+		public async Task ShowCalls()
+		{
+			_context ??= await CallContextFactory.CreateDbContextAsync();
+
+			if(_context != null)
+			{
+				AllCalls = await _context.Calls.ToListAsync();
+			}
+			if(_context != null)
+			{
+				await _context.DisposeAsync();
+			}
 		}
 	}
 }

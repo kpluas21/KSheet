@@ -242,5 +242,6 @@ namespace KSheet3.Data
 		}
 
 		public DbSet<Call> Calls { get; set; }
+
 	}
 }
