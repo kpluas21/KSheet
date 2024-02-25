@@ -54,6 +54,7 @@ else
 	<div class="form-group row">
 		<div class="offset-4 col-8">
 			<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCreateForm">Add a New Call</button>
+			<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCalls">Show Calls</button>
 		</div>
 	</div>
 
@@ -69,20 +70,57 @@ else
 						<th scope="col">Police Signal</th>
 						<th scope="col">Fire Signal</th>
 						<th scope="col">Notes</th>
+						<th scope="col">Edit</th>
+						<th scope="col">Delete</th>
 					</tr>
 				</thead>
 				<tbody>
 
 					@foreach (var call in @AllCalls)
 					{
-						<tr>
-							<th scope="row">@call.Id</th>
-							<td>@call.Position</td>
-							<td>@call.Address</td>
-							<td>@call.PdSignal</td>
-							<td>@call.FdSignal</td>
-							<td>@call.Notes</td>
-						</tr>
+						@if (!@EditRecord)
+						{
+							<tr>
+								<th scope="row">@call.Id</th>
+								<td>@call.Position</td>
+								<td>@call.Address</td>
+								<td>@call.PdSignal</td>
+								<td>@call.FdSignal</td>
+								<td>@call.Notes</td>
+								<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => ShowEditForm(call)">Edit</button></td>
+								<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => DeleteCall(call)">Delete</button></td>
+							</tr>
+						}
+						else
+						{
+							if(CallToUpdate != null && CallToUpdate.Id == call.Id)
+							{
+								<tr>
+									<th scope="row">@call.Id</th>
+									<td><input id="Position" name="Position" type="number" class="form-control" @bind="@CallToUpdate.Position" /></td>
+									<td><input id="Address" name="Address" type="text" class="form-control" @bind="@CallToUpdate.Address" /></td>
+									<td><input id="PdSignal" name="PdSignal" type="text" class="form-control" @bind="@CallToUpdate.PdSignal" /></td>
+									<td><input id="FdSignal" name="FdSignal" type="text" class="form-control" @bind="@CallToUpdate.FdSignal" /></td>
+									<td><input id="Notes" name="Notes" type="text" class="form-control" @bind="@CallToUpdate.Notes" /></td>
+									<td><button name="submit" class="btn btn-primary" @onclick="@UpdateCall">Save</button></td>
+								</tr>
+							}
+							else
+							{
+								<tr>
+									<th scope="row">@call.Id</th>
+									<td>@call.Position</td>
+									<td>@call.Address</td>
+									<td>@call.PdSignal</td>
+									<td>@call.FdSignal</td>
+									<td>@call.Notes</td>
+									<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => ShowEditForm(call)">Edit</button></td>
+									<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => DeleteCall(call)">Delete</button></td>
+									
+								</tr>
+							}
+						}
+
 					}
 				</tbody>
 			</table>
