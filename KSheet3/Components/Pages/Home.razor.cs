@@ -14,7 +14,7 @@ namespace KSheet3.Components.Pages
 		public Call? CallToUpdate { get; set; }
 		private CallContext? _context;
 
-		protected override async Task OnInitializedAsync()
+		protected override void OnInitialized()
 		{
 			ShowCreate = false;
 		}
