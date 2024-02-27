@@ -1,7 +1,5 @@
 ﻿using KSheet3.Data;
-using KSheet3.Migrations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace KSheet3.Components.Pages
 {
@@ -33,6 +31,9 @@ namespace KSheet3.Components.Pages
 			_context ??= await CallContextFactory.CreateDbContextAsync();
 			if(NewCall != null)
 			{
+				NewCall.Time = DateTime.Now;
+				
+
 				_context?.Calls.Add(NewCall);
 				_context?.SaveChangesAsync();
 

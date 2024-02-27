@@ -38,6 +38,13 @@
 	</div>
 
 	<div class="row">
+		<label for="Incident" class="col-4 col-form-label">Incident</label>
+		<div class="col-8">
+			<input id="Incident" name="Incident" type="number" class="form-control" min="0" max="999999" @bind="@NewCall.Incident">
+		</div>
+	</div>
+
+	<div class="row">
 		<label for="Notes" class="col-4 col-form-label">Notes</label>
 		<div class="col-8">
 			<input id="Notes" name="Notes" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.Notes">
@@ -65,10 +72,12 @@ else
 				<thead>
 					<tr>
 						<th scope="col">Id</th>
+						<th scope="col">Time</th>
 						<th scope="col">Position</th>
 						<th scope="col">Address</th>
 						<th scope="col">Police Signal</th>
 						<th scope="col">Fire Signal</th>
+						<th scope="col">Incident</th>
 						<th scope="col">Notes</th>
 						<th scope="col">Edit</th>
 						<th scope="col">Delete</th>
@@ -82,10 +91,12 @@ else
 						{
 							<tr>
 								<th scope="row">@call.Id</th>
+								<td>@call.Time</td>
 								<td>@call.Position</td>
 								<td>@call.Address</td>
 								<td>@call.PdSignal</td>
 								<td>@call.FdSignal</td>
+								<td>@call.Incident</td>
 								<td>@call.Notes</td>
 								<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => ShowEditForm(call)">Edit</button></td>
 								<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => DeleteCall(call)">Delete</button></td>

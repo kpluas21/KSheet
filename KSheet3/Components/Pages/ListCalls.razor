@@ -8,4 +8,46 @@
 <PageTitle>List Calls</PageTitle>
 
 <h1>List Calls</h1>
+<h3>Search for a call</h3>
 
+<div class="row">
+	<label for="Position" class="col-4 col-form-label">Position</label>
+	<div class="col-8">
+		<input id="Position" name="Position" type="number" class="form-control" min="1" max="160" @bind="@callQuery.Position">
+	</div>
+</div>
+
+<div class="row">
+	<label for="Position" class="col-4 col-form-label">Position</label>
+	<div class="col-8">
+		<input id="Position" name="Position" type="number" class="form-control" @bind="@callQuery.Address">
+	</div>
+</div>
+
+
+@if(searchResults != null && searchResults.Any())
+{
+	<h4>Search Results</h4>
+
+	<table>
+		<thead>
+			<tr>
+				<th scope="col">Position</th>
+				<th scope="col">Address</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var result in searchResults)
+			{
+				<tr>
+					<th>@result.Position</th>
+					<th>@result.Address</th>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+else
+{
+	<p>No results found</p>
+}
