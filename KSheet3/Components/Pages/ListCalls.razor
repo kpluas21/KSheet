@@ -11,18 +11,48 @@
 <h3>Search for a call</h3>
 
 <div class="row">
+	<label for="Id" class="col-4 col-form-label">Id</label>
+	<div class="col-8">
+		<input id="Id" name="Id" type="number" class="form-control" @bind="@callSearch.Id">
+	</div>
+</div>
+
+
+<div class="row">
 	<label for="Position" class="col-4 col-form-label">Position</label>
 	<div class="col-8">
-		<input id="Position" name="Position" type="number" class="form-control" min="1" max="160" @bind="@callQuery.Position">
+		<input id="Position" name="Position" type="number" class="form-control" max="160" @bind="@callSearch.Position">
 	</div>
 </div>
 
 <div class="row">
-	<label for="Position" class="col-4 col-form-label">Address</label>
+	<label for="Address" class="col-4 col-form-label">Address</label>
 	<div class="col-8">
-		<input id="Position" name="Position" type="number" class="form-control" @bind="@callQuery.Address">
+		<input id="Address" name="Address" type="text" class="form-control" @bind="@callSearch.Address">
 	</div>
 </div>
+
+<div class="row">
+	<label for="PdSignal" class="col-4 col-form-label">Police Signal</label>
+	<div class="col-8">
+		<input id="PdSignal" name="PdSignal" type="text" class="form-control" @bind="@callSearch.PdSignal">
+	</div>
+</div>
+
+<div class="row">
+	<label for="FdSignal" class="col-4 col-form-label">Fire Signal</label>
+	<div class="col-8">
+		<input id="FdSignal" name="FdSignal" type="text" class="form-control" @bind="@callSearch.FdSignal">
+	</div>
+</div>
+
+<div class="row">
+	<label for="Incident" class="col-4 col-form-label">Incident</label>
+	<div class="col-8">
+		<input id="Incident" name="Incident" type="number" max="999999" class="form-control" @bind="@callSearch.Incident">
+	</div>
+</div>
+
 
 <div class="form-group row">
 	<div class="offset-4 col-8">
@@ -30,7 +60,7 @@
 	</div>
 </div>
 
-@if(searchResults != null && searchResults.Count() > 0)
+@if(searchResults != null && searchResults.Any())
 {
 	<h4>Search Results</h4>
 
@@ -45,8 +75,8 @@
 			@foreach(var result in searchResults)
 			{
 				<tr>
-					<th>@result.Position</th>
-					<th>@result.Address</th>
+					<td>@result.Position</td>
+					<td>@result.Address</td>
 				</tr>
 			}
 		</tbody>
