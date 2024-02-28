@@ -23,12 +23,12 @@ namespace KSheet3.Components.Pages
 	{
 		public CallContext? _context;
 
-		public List<Call>? searchResults { get; set; }
-		public CallSearchModel? callSearch {  get; set; }
+		public List<Call>? SearchResults { get; set; }
+		public CallSearchModel? CallSearch {  get; set; }
 
 		protected override void OnInitialized()
 		{
-			callSearch = new CallSearchModel();
+			CallSearch = new CallSearchModel();
 		}
 
 		//SEARCH 
@@ -39,37 +39,44 @@ namespace KSheet3.Components.Pages
 
 			if(_context != null)
 			{
-				searchResults = _context.Calls.ToList(
+				var result = _context.Calls.AsQueryable();
 
-				if(callSearch.Id.HasValue)
+				if(CallSearch.Id.HasValue)
 				{
-					result = result.Where(m => m.Id.Equals(callSearch.Id));
+					result = result.Where(m => m.Id.Equals(CallSearch.Id));
 				}
 
-				if(callSearch.Incident.HasValue)
+				if(CallSearch.Incident.HasValue)
 				{
-					result = result.Where(m => m.Incident.Equals(callSearch.Incident));
+					result = result.Where(m => m.Incident.Equals(CallSearch.Incident));
 				}
 
-				if(!string.IsNullOrEmpty(callSearch.Address))
+				if(!string.IsNullOrEmpty(CallSearch.Address))
 				{
-					result = result.Where(m => m.Address.Contains(callSearch.Address));
+					result = result.Where(m => m.Address.Contains(CallSearch.Address));
 				}
 
-				if(!string.IsNullOrEmpty(callSearch.PdSignal))
+				if(!string.IsNullOrEmpty(CallSearch.PdSignal))
 				{
-					result = result.Where(m => m.PdSignal.Contains(callSearch.PdSignal));
+					result = result.Where(m => m.PdSignal.Contains(CallSearch.PdSignal));
 				}
 
-				if(!string.IsNullOrEmpty(callSearch.FdSignal))
+				if(!string.IsNullOrEmpty(CallSearch.FdSignal))
 				{
-					result = result.Where(m => m.FdSignal.Contains(callSearch.FdSignal));
+					result = result.Where(m => m.FdSignal.Contains(CallSearch.FdSignal));
 				}
 
-				if(callSearch.Position.HasValue)
+				if(CallSearch.Position.HasValue)
 				{
-					result = result.Where(m => m.Position.Equals(callSearch.Position));
+					result = result.Where(m => m.Position.Equals(CallSearch.Position));
 				}
+
+				if(CallSearch.TimeFrom.HasValue && CallSearch.TimeTo.HasValue) 
+				{
+					result = result.Where(m => m.Time >= CallSearch.TimeFrom && m.Time <= CallSearch.TimeTo);
+				}
+
+				SearchResults = result.ToList();
 			}
 			
 		}
