@@ -4,7 +4,7 @@
 	{
 		public int Id { get; set; }
 
-		public DateTime? Time { get; set; }
+		public DateTime Time { get; set; }
 		public int Position { get; set; }
 		public string? Address { get; set; }
 		public string? PdSignal { get; set; }

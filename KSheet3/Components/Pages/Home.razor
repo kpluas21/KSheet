@@ -3,6 +3,7 @@
 @rendermode InteractiveServer
 @page "/"
 @inject IDbContextFactory<CallContext> CallContextFactory
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Call Entry</PageTitle>
 <h1>Enter Call</h1>
@@ -13,7 +14,7 @@
 	<div class="row">
 		<label for="Position" class="col-4 col-form-label">Position</label>
 		<div class="col-8">
-			<input id="Position" name="Position" type="number" class="form-control" min="1" max="160" @bind="@NewCall.Position">
+			<input id="Position" name="Position" type="number" class="form-control" @bind="@NewCall.Position" required>
 		</div>
 	</div>
 	
@@ -92,7 +93,7 @@ else
 						{
 							<tr>
 								<th scope="row">@call.Id</th>
-								<td>@call.Time</td>
+								<td>@call.Time.ToString("yyyy-MM-dd HH:mm")</td>
 								<td>@call.Position</td>
 								<td>@call.Address</td>
 								<td>@call.PdSignal</td>

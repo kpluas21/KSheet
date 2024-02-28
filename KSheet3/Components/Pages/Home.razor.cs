@@ -1,5 +1,6 @@
 ﻿using KSheet3.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata;
 
 namespace KSheet3.Components.Pages
 {
@@ -32,7 +33,6 @@ namespace KSheet3.Components.Pages
 			if(NewCall != null)
 			{
 				NewCall.Time = DateTime.Now;
-				
 
 				_context?.Calls.Add(NewCall);
 				_context?.SaveChangesAsync();
