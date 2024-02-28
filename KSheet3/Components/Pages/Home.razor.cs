@@ -35,6 +35,32 @@ namespace KSheet3.Components.Pages
 				NewCall.Time = DateTime.Now;
 
 
+				if(!string.IsNullOrEmpty(NewCall.Address))
+				{
+					NewCall.Address = NewCall.Address.ToUpper();
+				}
+				else
+				{
+					NewCall.Address = "N/A";
+				}
+
+				if(!string.IsNullOrEmpty(NewCall.PdSignal))
+				{
+					NewCall.PdSignal = NewCall.PdSignal.ToUpper();
+				}
+				else
+				{
+					NewCall.PdSignal = "N/A";
+				}
+
+				if(!string.IsNullOrEmpty(NewCall.FdSignal))
+				{
+					NewCall.FdSignal = NewCall.FdSignal.ToUpper();
+				}
+				else
+				{
+					NewCall.FdSignal = "N/A";
+				}
 
 				_context?.Calls.Add(NewCall);
 				_context?.SaveChangesAsync();
@@ -51,6 +77,7 @@ namespace KSheet3.Components.Pages
 			if(_context != null)
 			{
 				AllCalls = await _context.Calls.ToListAsync();
+				AllCalls.Reverse();
 			}
 
 		}
