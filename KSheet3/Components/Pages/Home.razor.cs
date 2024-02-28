@@ -34,6 +34,8 @@ namespace KSheet3.Components.Pages
 			{
 				NewCall.Time = DateTime.Now;
 
+
+
 				_context?.Calls.Add(NewCall);
 				_context?.SaveChangesAsync();
 

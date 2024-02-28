@@ -43,11 +43,14 @@ namespace KSheet3.Components.Pages
 
 				if(CallSearch.Id.HasValue)
 				{
+					Console.WriteLine(CallSearch.Id.Value.ToString());
 					result = result.Where(m => m.Id.Equals(CallSearch.Id));
 				}
 
 				if(CallSearch.Incident.HasValue)
 				{
+					Console.WriteLine(CallSearch.Incident.Value);
+
 					result = result.Where(m => m.Incident.Equals(CallSearch.Incident));
 				}
 

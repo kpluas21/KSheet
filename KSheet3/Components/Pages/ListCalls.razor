@@ -2,6 +2,7 @@
 @using KSheet3.Data
 @using Microsoft.EntityFrameworkCore
 @inject IDbContextFactory<CallContext> CallContextFactory
+@inject IJSRuntime JSRuntime
 
 @rendermode InteractiveServer
 
@@ -81,36 +82,47 @@
 
 
 
-@if(SearchResults != null && SearchResults.Any())
+@if (SearchResults != null && SearchResults.Any())
 {
 	<h4>Search Results</h4>
-
-	<table>
-		<thead>
-			<tr>
-				<th scope="col">Id</th>
-				<th scope="col">Position</th>
-				<th scope="col">Address</th>
-			</tr>
-		</thead>
-		<tbody>
-			@foreach(var result in SearchResults)
-			{
+	<div class="table-responsive">
+		<table class="table table-striped table-hover table-bordered table-light border-dark">
+			<thead>
 				<tr>
-					<td>@result.Id</td>
-					<td>@result.Position</td>
-					<td>@result.Address</td>
+					<th scope="col">Id</th>
+					<th scope="col">Time</th>
+					<th scope="col">Position</th>
+					<th scope="col">Address</th>
+					<th scope="col">Police Signal</th>
+					<th scope="col">Fire Signal</th>
+					<th scope="col">Incident</th>
+					<th scope="col">Notes</th>
+					@*
+							TODO: EDIT AND DELETE HERE
+						*@
+
 				</tr>
-			}
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				@foreach (var result in SearchResults)
+				{
+					<tr>
+						<th scope="row">@result.Id</th>
+						<td>@result.Time.ToString("yyyy-MM-dd HH:mm")</td>
+						<td>@result.Position</td>
+						<td>@result.Address</td>
+						<td>@result.PdSignal</td>
+						<td>@result.FdSignal</td>
+						<td>@result.Incident</td>
+						<td>@result.Notes</td>
+
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
 }
 else
 {
 	<p>No results found</p>
-}
-
-@code
-{
-
 }
