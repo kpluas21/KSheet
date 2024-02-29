@@ -56,16 +56,19 @@ namespace KSheet3.Components.Pages
 
 				if(!string.IsNullOrEmpty(CallSearch.Address))
 				{
-					result = result.Where(m => m.Address.Contains(CallSearch.Address));
+/*					CallSearch.Address = CallSearch.Address.ToUpper();
+*/					result = result.Where(m => m.Address.Contains(CallSearch.Address));
 				}
 
 				if(!string.IsNullOrEmpty(CallSearch.PdSignal))
 				{
+					CallSearch.PdSignal = CallSearch.PdSignal.ToUpper();
 					result = result.Where(m => m.PdSignal.Contains(CallSearch.PdSignal));
 				}
 
 				if(!string.IsNullOrEmpty(CallSearch.FdSignal))
 				{
+					CallSearch.FdSignal = CallSearch.FdSignal.ToUpper();
 					result = result.Where(m => m.FdSignal.Contains(CallSearch.FdSignal));
 				}
 
