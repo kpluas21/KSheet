@@ -4,9 +4,9 @@
 
 KSheet is an interactive web application made with Blazor used to log calls taken at a call center.
 
-- This was made in an effort to save paper and speed up 
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
+- This was made in an effort to save paper, trees and time!
+- 
+- Enables faster searching instead 
 - What did you learn?
 
 ## Table of Contents (Optional)
@@ -20,25 +20,24 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 ## Installation
 
-What are the steps required to install your project? Provide a step-by-step description of how to get the development environment running.
+TBD
 
 ## Usage
 
-Provide instructions and examples for use. Include screenshots as needed.
+In the main 'Home' screen, you can enter values such as the address, police signal, incident number and so on. Hitting submit will enter the call into the database.
 
-To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:
+![Entering a call](assets/images/Call_entry.png)
 
-    ```md
-    ![alt text](assets/images/screenshot.png)
-    ```
+In the 'Search' screen, you can attempt to look for a specific call using several fields. Be sure to enter as much information as possible for a more focused search.
 
+![Searching for a call](assets/images/list_calls.png)
+
+Calls are displayed in a neat table.
+
+![Listing some calls](assets/images/table_calls.png)
 ## Credits
 
-List your collaborators, if any, with links to their GitHub profiles.
-
-If you used any third-party assets that require attribution, list the creators with links to their primary web presence in this section.
-
-If you followed tutorials, include links to those here as well.
+A huge thanks to [this](https://www.allhandsontech.com/programming/blazor/how-to-sqlite-blazor/) tutorial which really made the foundation for this application. I mostly repurposed it for a different use and added the searching functions. 
 
 ## License
 
