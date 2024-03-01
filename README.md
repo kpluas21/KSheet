@@ -25,6 +25,11 @@ In the main 'Home' screen, you can enter values such as the address, police sign
 
 ![Entering a call](assets/images/Call_entry.png)
 
+Entering a call into the database requires at the minimum, data in the following fields
+- Position
+- Address
+- Incident Number
+
 In the 'Search' screen, you can attempt to look for a specific call using several fields. Be sure to enter as much information as possible for a more focused search.
 
 ![Searching for a call](assets/images/list_calls.png)
