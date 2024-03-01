@@ -11,52 +11,59 @@
 @if(ShowCreate)
 {
 	<h3>Add a new call</h3>
-	<div class="row">
-		<label for="Position" class="col-4 col-form-label">Position</label>
-		<div class="col-8">
-			<input id="Position" name="Position" type="number" class="form-control" @bind="@NewCall.Position" required>
+	<EditForm Model=NewCall OnValidSubmit="ConfirmAddCall" FormName="CallEntry">
+		<DataAnnotationsValidator/>
+		<div class="row">
+			<label for="Position" class="col-4 col-form-label">Position</label>
+			<div class="col-8">
+				<input id="Position" name="Position" type="number" class="form-control" @bind="@NewCall.Position">
+				<ValidationMessage For="() => NewCall.Position"/>
+			</div>
 		</div>
-	</div>
-	
-	<div class="row">
-		<label for="Address" class="col-4 col-form-label">Address</label>
-		<div class="col-8">
-			<input id="Address" name="Address" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.Address">
-		</div>
-	</div>
 
-	<div class="row">
-		<label for="PdSignal" class="col-4 col-form-label">Police Signal</label>
-		<div class="col-8">
-			<input id="PdSignal" name="PdSignal" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.PdSignal">
+		<div class="row">
+			<label for="Address" class="col-4 col-form-label">Address</label>
+			<div class="col-8">
+				<input id="Address" name="Address" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.Address">
+				<ValidationMessage For="() => NewCall.Address"/>
+			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<label for="FdSignal" class="col-4 col-form-label">Fire Signal</label>
-		<div class="col-8">
-			<input id="FdSignal" name="FdSignal" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.FdSignal">
+		<div class="row">
+			<label for="PdSignal" class="col-4 col-form-label">Police Signal</label>
+			<div class="col-8">
+				<input id="PdSignal" name="PdSignal" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.PdSignal">
+			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<label for="Incident" class="col-4 col-form-label">Incident</label>
-		<div class="col-8">
-			<input id="Incident" name="Incident" type="number" class="form-control" min="0" max="999999" @bind="@NewCall.Incident">
+		<div class="row">
+			<label for="FdSignal" class="col-4 col-form-label">Fire Signal</label>
+			<div class="col-8">
+				<input id="FdSignal" name="FdSignal" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.FdSignal">
+			</div>
 		</div>
-	</div>
 
-	<div class="row">
-		<label for="Notes" class="col-4 col-form-label">Notes</label>
-		<div class="col-8">
-			<input id="Notes" name="Notes" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.Notes">
+		<div class="row">
+			<label for="Incident" class="col-4 col-form-label">Incident</label>
+			<div class="col-8">
+				<input id="Incident" name="Incident" type="number" class="form-control" min="0" max="999999" @bind="@NewCall.Incident">
+				<ValidationMessage For="() => NewCall.Incident"/>
+			</div>
 		</div>
-	</div>
-	<div class="form-group row">
-		<div class="offset-4 col-8">
-			<button name="submit" type="submit" class="btn btn-primary" @onclick="CreateNewCall">Submit</button>
+
+		<div class="row">
+			<label for="Notes" class="col-4 col-form-label">Notes</label>
+			<div class="col-8">
+				<input id="Notes" name="Notes" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.Notes">
+			</div>
 		</div>
-	</div>
+		<div class="form-group row">
+			<div class="offset-4 col-8">
+				<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+			</div>
+		</div>
+	</EditForm>
+
 }
 else
 {
@@ -64,6 +71,7 @@ else
 		<div class="offset-4 col-8">
 			<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCreateForm">Add a New Call</button>
 			<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCalls">Show Calls</button>
+			<br />
 		</div>
 	</div>
 
@@ -144,5 +152,15 @@ else
 
 @code
 {
+	async Task ConfirmAddCall()
+	{
+		bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to add this call?");
+		{
+			if(confirmed)
+			{
+				await CreateNewCall();
+			}
+		}
+	}
 
 }

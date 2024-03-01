@@ -1,12 +1,18 @@
-﻿namespace KSheet3.Data
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace KSheet3.Data
 {
 	public class Call
 	{
 		public int Id { get; set; }
 
 		public DateTime Time { get; set; }
-		public int Position { get; set; }
-		public int Incident { get; set; }
+		[Required]
+		public int? Position { get; set; }
+		[Required]
+		public int? Incident { get; set; }
+		[Required]
+		[StringLength(50, ErrorMessage ="Address is too long")]
 		public string Address { get; set; }
 		
 		//These fields can be null (in other words, not required in order to create the call)

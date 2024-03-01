@@ -1,4 +1,5 @@
 ﻿using KSheet3.Data;
+using Microsoft.AspNetCore.Components;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
 
@@ -9,6 +10,7 @@ namespace KSheet3.Components.Pages
 		public bool ShowCreate { get; set; }
 		public bool EditRecord { get; set; }
 		public int CallId { get; set; }
+		[SupplyParameterFromForm]
 		public Call? NewCall { get; set; }
 		public List<Call>? AllCalls { get; set; }
 		
