@@ -41,11 +41,6 @@ Calls are displayed in a neat table.
 
 A huge thanks to [this](https://www.allhandsontech.com/programming/blazor/how-to-sqlite-blazor/) tutorial which really made the foundation for this application. I mostly repurposed it for a different use and added the searching functions. 
 
-## License
-
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
-
----
 
 ## Badges
 
