@@ -42,7 +42,7 @@ namespace KSheet3.Components.Pages
 					NewCall.Address = NewCall.Address.ToUpper();
 				}
 				else
-				{
+				{//This shouldn't be reached with the validation messages in place
 					NewCall.Address = "N/A";
 				}
 
@@ -51,7 +51,7 @@ namespace KSheet3.Components.Pages
 					NewCall.PdSignal = NewCall.PdSignal.ToUpper();
 				}
 				else
-				{
+				{//same here
 					NewCall.PdSignal = "N/A";
 				}
 
@@ -60,7 +60,7 @@ namespace KSheet3.Components.Pages
 					NewCall.FdSignal = NewCall.FdSignal.ToUpper();
 				}
 				else
-				{
+				{//here too
 					NewCall.FdSignal = "N/A";
 				}
 

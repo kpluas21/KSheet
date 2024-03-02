@@ -56,8 +56,8 @@ namespace KSheet3.Components.Pages
 
 				if(!string.IsNullOrEmpty(CallSearch.Address))
 				{
-/*					CallSearch.Address = CallSearch.Address.ToUpper();
-*/					result = result.Where(m => m.Address.Contains(CallSearch.Address));
+					CallSearch.Address = CallSearch.Address.ToUpper();
+					result = result.Where(m => m.Address.Contains(CallSearch.Address));
 				}
 
 				if(!string.IsNullOrEmpty(CallSearch.PdSignal))
