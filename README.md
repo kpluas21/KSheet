@@ -24,6 +24,7 @@ This will be enough to get you started developing and running the application. [
 ## Installation
 
 To open the project in a development environment, simply open the .sln file with Visual Studio and build. 
+Otherwise, simply run KSheet.exe and open the url in a browser of your choosing. Make sure the port listed is open to traffic. By default, it is 5000. 
 
 ## Usage
 
