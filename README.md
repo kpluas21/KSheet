@@ -8,12 +8,18 @@ KSheet is an interactive web application made with Blazor used to log calls take
 - Allows the lead supervisors to quickly check calls 
 - Enables faster searching instead of manually reading through physical sheets of paper.
 
-## Table of Contents (Optional)
+## Table of Contents
 
+- [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Credits](#credits)
-- [License](#license)
+- [Contibuting](#contributing)
+
+## Requirements
+
+Make sure you have the latest version of the .NET SDK installed on the host computer. 
+This will be enough to get you started developing and running the application. [.NET Downloads](https://dotnet.microsoft.com/en-us/download)
 
 ## Installation
 
@@ -47,7 +53,7 @@ A huge thanks to [this](https://www.allhandsontech.com/programming/blazor/how-to
 ![badmath](https://img.shields.io/github/languages/top/lernantino/badmath)
 
 
-## How to Contribute
+## Contributing
 
-Shoot me an email or create an issue!
+If you have any feedback, problems, or you want to help with development, shoot me an email or create an issue!
 
