@@ -1,0 +1,176 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
+@using KSheet4.Data
+@rendermode InteractiveServer
+@page "/entercall"
+@inject IDbContextFactory<CallContext> CallContextFactory
+@inject UserManager<ApplicationUser> UserManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Call Entry</PageTitle>
+<AuthorizeView>
+	<NotAuthorized>
+		<h2>You must be logged in to view this page.</h2>
+	</NotAuthorized>
+	<Authorized>
+		<h1>Enter Call</h1>
+		@if (ShowCreate)
+		{
+			<h3>Add a new call</h3>
+			<EditForm Model=NewCall OnValidSubmit="ConfirmAddCall" FormName="CallEntry" Context="Editformcontext">
+				<DataAnnotationsValidator />
+				<div class="row">
+					<label for="Position" class="col-4 col-form-label">Position</label>
+					<div class="col-8">
+						<input id="Position" name="Position" type="number" class="form-control" @bind="@NewCall.Position">
+						<ValidationMessage For="() => NewCall.Position" />
+					</div>
+				</div>
+
+				<div class="row">
+					<label for="Address" class="col-4 col-form-label">Address</label>
+					<div class="col-8">
+						<input id="Address" name="Address" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.Address">
+						<ValidationMessage For="() => NewCall.Address" />
+					</div>
+				</div>
+
+				<div class="row">
+					<label for="PdSignal" class="col-4 col-form-label">Police Signal</label>
+					<div class="col-8">
+						<input id="PdSignal" name="PdSignal" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.PdSignal">
+					</div>
+				</div>
+
+				<div class="row">
+					<label for="FdSignal" class="col-4 col-form-label">Fire Signal</label>
+					<div class="col-8">
+						<input id="FdSignal" name="FdSignal" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.FdSignal">
+					</div>
+				</div>
+
+				<div class="row">
+					<label for="Incident" class="col-4 col-form-label">Incident</label>
+					<div class="col-8">
+						<input id="Incident" name="Incident" type="number" class="form-control" min="0" max="999999" @bind="@NewCall.Incident">
+						<ValidationMessage For="() => NewCall.Incident" />
+					</div>
+				</div>
+
+				<div class="row">
+					<label for="Notes" class="col-4 col-form-label">Notes</label>
+					<div class="col-8">
+						<input id="Notes" name="Notes" type="text" class="form-control" placeholder="Apt #, etc" style="text-transform: uppercase;" @bind="@NewCall.Notes">
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="offset-4 col-8">
+						<button name="submit" type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</div>
+			</EditForm>
+
+		}
+		else
+		{
+			<div class="form-group row">
+				<div class="offset-4 col-8">
+					<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCreateForm">Add a New Call</button>
+					<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCalls">Show Calls</button>
+					<br />
+				</div>
+			</div>
+
+			@if (@AllCalls is not null && @AllCalls.Count > 0)
+			{
+				<div class="table-responsive">
+					<table class="table table-striped table-hover table-bordered table-light border-dark">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Time</th>
+								<th scope="col">Position</th>
+								<th scope="col">Address</th>
+								<th scope="col">Police Signal</th>
+								<th scope="col">Fire Signal</th>
+								<th scope="col">Incident</th>
+								<th scope="col">Notes</th>
+								<th scope="col">Edit</th>
+								<th scope="col">Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							@foreach (var call in @AllCalls)
+							{
+								@if (!@EditRecord)
+								{
+									<tr>
+										<th scope="row">@call.Id</th>
+										<td>@call.Time.ToString("yyyy-MM-dd HH:mm")</td>
+										<td>@call.Position</td>
+										<td>@call.Address</td>
+										<td>@call.PdSignal</td>
+										<td>@call.FdSignal</td>
+										<td>@call.Incident</td>
+										<td>@call.Notes</td>
+										<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => ShowEditForm(call)">Edit</button></td>
+										<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => DeleteCall(call)">Delete</button></td>
+									</tr>
+								}
+								else
+								{
+									if (CallToUpdate != null && CallToUpdate.Id == call.Id)
+									{
+										<tr>
+											<th scope="row">@call.Id</th>
+											<td><input id="Position" name="Position" type="number" class="form-control" @bind="@CallToUpdate.Position" /></td>
+											<td><input id="Address" name="Address" type="text" class="form-control" @bind="@CallToUpdate.Address" /></td>
+											<td><input id="PdSignal" name="PdSignal" type="text" class="form-control" @bind="@CallToUpdate.PdSignal" /></td>
+											<td><input id="FdSignal" name="FdSignal" type="text" class="form-control" @bind="@CallToUpdate.FdSignal" /></td>
+											<td><input id="Notes" name="Notes" type="text" class="form-control" @bind="@CallToUpdate.Notes" /></td>
+											<td><button name="submit" class="btn btn-primary" @onclick="@UpdateCall">Save</button></td>
+										</tr>
+									}
+									else
+									{
+										<tr>
+											<th scope="row">@call.Id</th>
+											<td>@call.Position</td>
+											<td>@call.Address</td>
+											<td>@call.PdSignal</td>
+											<td>@call.FdSignal</td>
+											<td>@call.Notes</td>
+											<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => ShowEditForm(call)">Edit</button></td>
+											<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => DeleteCall(call)">Delete</button></td>
+
+										</tr>
+									}
+								}
+
+							}
+						</tbody>
+					</table>
+				</div>
+
+			}
+		}
+	</Authorized>
+</AuthorizeView>
+
+
+@code
+{
+	async Task ConfirmAddCall()
+	{
+		bool confirmed = await JSRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to add this call?");
+		{
+			if(confirmed)
+			{
+				await CreateNewCall();
+			}
+		}
+	}
+
+}

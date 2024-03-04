@@ -1,0 +1,19 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using KSheet4.Data
+@rendermode InteractiveServer
+@page "/"
+
+<h1>Home</h1>
+<AuthorizeView>
+	<Authorized>
+		<h2>
+			Welcome!
+		</h2>
+	</Authorized>
+	<NotAuthorized>
+		<h2>Please log in to use this application</h2>
+	</NotAuthorized>
+</AuthorizeView>
+@code {
+
+}
