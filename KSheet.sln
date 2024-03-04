@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KSheet", "KSheet\KSheet.csproj", "{645865D1-6593-49C9-BD99-AF86B68AFB0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{645865D1-6593-49C9-BD99-AF86B68AFB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{645865D1-6593-49C9-BD99-AF86B68AFB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{645865D1-6593-49C9-BD99-AF86B68AFB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{645865D1-6593-49C9-BD99-AF86B68AFB0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEDD0B25-B25E-42D2-8546-6288BDFBE240}
+	EndGlobalSection
+EndGlobal
