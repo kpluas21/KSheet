@@ -28,7 +28,15 @@ Otherwise, simply run KSheet.exe and open the url in a browser of your choosing.
 
 ## Usage
 
-In the main 'Home' screen, you can enter values such as the address, police signal, incident number and so on. Hitting submit will enter the call into the database.
+KSheet will first require you to register an account with your email address before you can start using it. This is to better track changes to the database.
+
+![Registering an account](assets/images/register.png)
+
+In the main 'Home' screen, you can choose to either enter a new call or search for an existing one. More features are to come!
+
+![Home screen](assets/images/home.png)
+
+Simply fill out the form to enter a new call into the database.
 
 ![Entering a call](assets/images/Call_entry.png)
 
