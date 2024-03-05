@@ -2,14 +2,27 @@
 
 @inject NavigationManager NavigationManager
 
-<div class="top-row ps-3 navbar navbar-dark">
+@* <div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">KSheet</a>
     </div>
 </div>
 
 <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
+ *@
+ <AuthorizeView>
+     <Authorized>
+        <MudNavMenu>
+            <MudNavLink Href="Account/Manage" Match="NavLinkMatch.All">@context.User.Identity?.Name</MudNavLink>
+            
+        </MudNavMenu>
+     </Authorized>
+     <NotAuthorized>
+         <MudNavLink Href="Account/Login" Match="NavLinkMatch.Prefix">Login</MudNavLink>
+     </NotAuthorized>
+ </AuthorizeView>
 
+@* 
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
 
@@ -23,9 +36,6 @@
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="entercall" Match="NavLinkMatch.All">
                         <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Enter Call
-@*                         <svg class="bi" width=@Size height=@Size fill="currentColor" @attributes=@CapturedAttributes>
-                                <use href="/database-add.svg"></use>
-                            </svg> *@
                     </NavLink>
                 </div>
 
@@ -65,14 +75,8 @@
         </AuthorizeView>
     </nav>
 </div>
-
+ *@
 @code {
-    [Parameter]
-    public int Size { get; set; } = 24;
-
-    [Parameter(CaptureUnmatchedValues = true)]
-    public Dictionary<string, object> CapturedAttributes { get; set; } = default;
-
     private string? currentUrl;
 
     protected override void OnInitialized()

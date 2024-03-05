@@ -1,6 +1,27 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page">
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet"/>
+<link href="_content/MudBlazor/Mudblazor.min.css" rel="stylesheet" />
+
+<MudLayout>
+    <MudAppBar>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())"/>
+        KSheet
+    </MudAppBar>
+    <MudDrawer @bind-Open="@_drawerOpen">
+        <NavMenu/>
+    </MudDrawer>
+
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
+
+@* <div class="page">
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -15,9 +36,21 @@
         </article>
     </main>
 </div>
-
+ *@
 <div id="blazor-error-ui">
     An unhandled error has occurred.
     <a href="" class="reload">Reload</a>
     <a class="dismiss">🗙</a>
 </div>
+
+<script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
+@code
+{
+    public bool _drawerOpen = true;
+
+    public void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}
