@@ -81,6 +81,11 @@ namespace KSheet.Components.Pages
 					result = result.Where(m => m.Time >= CallSearch.TimeFrom && m.Time <= CallSearch.TimeTo);
 				}
 
+				if(!string.IsNullOrEmpty(CallSearch.Notes))
+				{
+					result = result.Where(m => m.Notes.ToUpper().Contains(CallSearch.Notes.ToUpper()));
+				}
+
 				SearchResults = result.ToList();
 			}
 

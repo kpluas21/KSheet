@@ -13,13 +13,6 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
 
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="auth">
-                <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
-            </NavLink>
-        </div>
-
         <AuthorizeView>
             <Authorized>
                 <div class="nav-item px-3">
@@ -49,6 +42,12 @@
                 </div>
             </Authorized>
             <NotAuthorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="auth">
+                        <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
+                    </NavLink>
+                </div>
+
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="Account/Register">
                         <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
