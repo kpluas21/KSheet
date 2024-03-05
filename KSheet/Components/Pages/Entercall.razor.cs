@@ -29,13 +29,14 @@ namespace KSheet.Components.Pages
 		}
 
 		//CREATE
+		//By default, any text field is auto capitalized to make searching easier. 
 		public async Task CreateNewCall()
 		{
-			
+
 			_context ??= await CallContextFactory.CreateDbContextAsync();
 			_authenticationState ??= await AuthenticationStateProvider.GetAuthenticationStateAsync();
 			var user = UserManager.GetUserAsync(_authenticationState.User);
-			
+
 
 			if (NewCall != null)
 			{
@@ -68,6 +69,11 @@ namespace KSheet.Components.Pages
 				else
 				{//here too
 					NewCall.FdSignal = "N/A";
+				}
+
+				if(!string.IsNullOrEmpty(NewCall.Notes))
+				{
+					NewCall.Notes = NewCall.Notes.ToUpper();
 				}
 
 				_context?.Calls.Add(NewCall);

@@ -22,50 +22,50 @@
 				<DataAnnotationsValidator />
 				<div class="row">
 					<label for="Position" class="col-4 col-form-label">Position</label>
-					<div class="col-8">
-						<input id="Position" name="Position" type="number" class="form-control" @bind="@NewCall.Position">
+					<div class="col-8 mt-2">
+						<input id="Position" name="Position" type="number" class="form-control" placeholder="Calltaker's Position: 154, 160, ETC" @bind="@NewCall.Position">
 						<ValidationMessage For="() => NewCall.Position" />
 					</div>
 				</div>
 
 				<div class="row">
 					<label for="Address" class="col-4 col-form-label">Address</label>
-					<div class="col-8">
-						<input id="Address" name="Address" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.Address">
+					<div class="col-8 mt-2">
+						<input id="Address" name="Address" type="text" class="form-control" placeholder="123 SESAME ST" style="text-transform: uppercase;" @bind="@NewCall.Address">
 						<ValidationMessage For="() => NewCall.Address" />
 					</div>
 				</div>
 
 				<div class="row">
 					<label for="PdSignal" class="col-4 col-form-label">Police Signal</label>
-					<div class="col-8">
-						<input id="PdSignal" name="PdSignal" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.PdSignal">
+					<div class="col-8 mt-2">
+						<input id="PdSignal" name="PdSignal" type="text" class="form-control" placeholder="32, 27P, Etc" style="text-transform: uppercase;" @bind="@NewCall.PdSignal">
 					</div>
 				</div>
 
 				<div class="row">
 					<label for="FdSignal" class="col-4 col-form-label">Fire Signal</label>
-					<div class="col-8">
-						<input id="FdSignal" name="FdSignal" type="text" class="form-control" style="text-transform: uppercase;" @bind="@NewCall.FdSignal">
+					<div class="col-8 mt-2">
+						<input id="FdSignal" name="FdSignal" type="text" class="form-control" placeholder="26A1, 341F, Etc" style="text-transform: uppercase;" @bind="@NewCall.FdSignal">
 					</div>
 				</div>
 
 				<div class="row">
 					<label for="Incident" class="col-4 col-form-label">Incident</label>
-					<div class="col-8">
-						<input id="Incident" name="Incident" type="number" class="form-control" min="0" max="999999" @bind="@NewCall.Incident">
+					<div class="col-8 mt-2">
+						<input id="Incident" name="Incident" type="number" class="form-control" placeholder="Last 6 digits of incident #" min="0" max="999999" @bind="@NewCall.Incident">
 						<ValidationMessage For="() => NewCall.Incident" />
 					</div>
 				</div>
 
 				<div class="row">
 					<label for="Notes" class="col-4 col-form-label">Notes</label>
-					<div class="col-8">
-						<input id="Notes" name="Notes" type="text" class="form-control" placeholder="Apt #, etc" style="text-transform: uppercase;" @bind="@NewCall.Notes">
+					<div class="col-8 mt-2">
+						<textarea id="Notes" name="Notes" type="text" rows="3" class="form-control" placeholder="Apt #, etc" style="text-transform: uppercase;" @bind="@NewCall.Notes"/>
 					</div>
 				</div>
 				<div class="form-group row">
-					<div class="offset-4 col-8">
+					<div class="offset-4 col-8 mt-2">
 						<button name="submit" type="submit" class="btn btn-primary">Submit</button>
 					</div>
 				</div>
@@ -104,50 +104,55 @@
 
 							@foreach (var call in @AllCalls)
 							{
-								@if (!@EditRecord)
-								{
-									<tr>
-										<th scope="row">@call.Id</th>
-										<td>@call.Time.ToString("yyyy-MM-dd HH:mm")</td>
-										<td>@call.Position</td>
-										<td>@call.Address</td>
-										<td>@call.PdSignal</td>
-										<td>@call.FdSignal</td>
-										<td>@call.Incident</td>
-										<td>@call.Notes</td>
-										<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => ShowEditForm(call)">Edit</button></td>
-										<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => DeleteCall(call)">Delete</button></td>
-									</tr>
-								}
-								else
-								{
-									if (CallToUpdate != null && CallToUpdate.Id == call.Id)
+									@if (!@EditRecord)
 									{
 										<tr>
 											<th scope="row">@call.Id</th>
-											<td><input id="Position" name="Position" type="number" class="form-control" @bind="@CallToUpdate.Position" /></td>
-											<td><input id="Address" name="Address" type="text" class="form-control" @bind="@CallToUpdate.Address" /></td>
-											<td><input id="PdSignal" name="PdSignal" type="text" class="form-control" @bind="@CallToUpdate.PdSignal" /></td>
-											<td><input id="FdSignal" name="FdSignal" type="text" class="form-control" @bind="@CallToUpdate.FdSignal" /></td>
-											<td><input id="Notes" name="Notes" type="text" class="form-control" @bind="@CallToUpdate.Notes" /></td>
-											<td><button name="submit" class="btn btn-primary" @onclick="@UpdateCall">Save</button></td>
-										</tr>
-									}
-									else
-									{
-										<tr>
-											<th scope="row">@call.Id</th>
+											<td>@call.Time.ToString("yyyy-MM-dd HH:mm")</td>
 											<td>@call.Position</td>
 											<td>@call.Address</td>
 											<td>@call.PdSignal</td>
 											<td>@call.FdSignal</td>
+											<td>@call.Incident</td>
 											<td>@call.Notes</td>
 											<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => ShowEditForm(call)">Edit</button></td>
 											<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => DeleteCall(call)">Delete</button></td>
-
 										</tr>
 									}
-								}
+									else
+									{
+										if (CallToUpdate != null && CallToUpdate.Id == call.Id)
+										{
+											<tr>
+												<th scope="row">@call.Id</th>
+											<td>@call.Time.ToString("yyyy-MM-dd HH:mm")</td>
+												<td><input id="Position" name="Position" type="number" class="form-control" @bind="@CallToUpdate.Position" /></td>
+												<td><input id="Address" name="Address" type="text" class="form-control" @bind="@CallToUpdate.Address" /></td>
+												<td><input id="PdSignal" name="PdSignal" type="text" class="form-control" @bind="@CallToUpdate.PdSignal" /></td>
+												<td><input id="FdSignal" name="FdSignal" type="text" class="form-control" @bind="@CallToUpdate.FdSignal" /></td>
+												<td>@call.Incident</td>
+												<td><input id="Notes" name="Notes" type="text" class="form-control" @bind="@CallToUpdate.Notes" /></td>
+												<td><button name="submit" class="btn btn-primary" @onclick="@UpdateCall">Save</button></td>
+											</tr>
+										}
+										else
+										{
+											<tr>
+												<th scope="row">@call.Id</th>
+											<td>@call.Time.ToString("yyyy-MM-dd HH:mm")</td>
+												<td>@call.Position</td>
+												<td>@call.Address</td>
+												<td>@call.PdSignal</td>
+												<td>@call.FdSignal</td>
+												<td>@call.Incident</td>
+												<td>@call.Notes</td>
+												<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => ShowEditForm(call)">Edit</button></td>
+												<td><button name="submit" type="submit" class="btn btn-primary" @onclick="() => DeleteCall(call)">Delete</button></td>
+
+											</tr>
+										}
+									}
+
 
 							}
 						</tbody>
