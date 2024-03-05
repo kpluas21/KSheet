@@ -20,6 +20,14 @@ namespace KSheet.Components.Pages
 		protected override void OnInitialized()
 		{
 			ShowCreate = false;
+			ShowCallsSync();
+		}
+
+		private void ShowCallsSync()
+		{
+			Task.Run(async () => {
+				await ShowCalls();
+			}).Wait();
 		}
 
 		public void ShowCreateForm()

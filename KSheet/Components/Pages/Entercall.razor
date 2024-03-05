@@ -14,7 +14,10 @@
 		<h2>You must be logged in to view this page.</h2>
 	</NotAuthorized>
 	<Authorized>
+		<div class="row">
 		<h1>Enter Call</h1>
+
+		</div>
 		@if (ShowCreate)
 		{
 			<h3>Add a new call</h3>
@@ -75,7 +78,7 @@
 		else
 		{
 			<div class="form-group row">
-				<div class="offset-4 col-8">
+				<div class="offset-4 col-8 mb-2">
 					<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCreateForm">Add a New Call</button>
 					<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCalls">Show Calls</button>
 					<br />
@@ -159,6 +162,10 @@
 					</table>
 				</div>
 
+			}
+			else
+			{
+				<h2>No calls entered yet.</h2>
 			}
 		}
 	</Authorized>
