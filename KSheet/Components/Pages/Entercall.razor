@@ -15,7 +15,15 @@
 	</NotAuthorized>
 	<Authorized>
 		<div class="row">
-		<h1>Enter Call</h1>
+		<h1 style="display:flex; align-items:center">Calls
+			@if(!ShowCreate)
+				{
+					<div style=" margin-left:auto">
+						<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCreateForm">Add a New Call</button>
+
+					</div>
+				}
+			</h1>
 
 		</div>
 		@if (ShowCreate)
@@ -77,14 +85,6 @@
 		}
 		else
 		{
-			<div class="form-group row">
-				<div class="offset-4 col-8 mb-2">
-					<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCreateForm">Add a New Call</button>
-					<button name="submit" type="submit" class="btn btn-primary" @onclick="ShowCalls">Show Calls</button>
-					<br />
-				</div>
-			</div>
-
 			@if (@AllCalls is not null && @AllCalls.Count > 0)
 			{
 				<div class="table-responsive">

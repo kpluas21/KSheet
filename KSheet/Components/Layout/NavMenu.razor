@@ -23,6 +23,9 @@
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="entercall" Match="NavLinkMatch.All">
                         <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Enter Call
+@*                         <svg class="bi" width=@Size height=@Size fill="currentColor" @attributes=@CapturedAttributes>
+                                <use href="/database-add.svg"></use>
+                            </svg> *@
                     </NavLink>
                 </div>
 
@@ -64,6 +67,12 @@
 </div>
 
 @code {
+    [Parameter]
+    public int Size { get; set; } = 24;
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object> CapturedAttributes { get; set; } = default;
+
     private string? currentUrl;
 
     protected override void OnInitialized()
