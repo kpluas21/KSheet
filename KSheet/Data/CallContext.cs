@@ -2,34 +2,34 @@
 
 namespace KSheet.Data
 {
-	public class CallContext : DbContext
-	{
-		protected readonly IConfiguration Configuration;
-		private Random gen = new Random();
-		public CallContext(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    public class CallContext : DbContext
+    {
+        protected readonly IConfiguration Configuration;
+        private Random gen = new Random();
+        public CallContext(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public DateTime RandomDay()
-		{
-			DateTime start = new DateTime(1995, 1, 1);
-			int range = (DateTime.Now - start).Days;
-			return start.AddDays(gen.Next(range));
-		}
+        public DateTime RandomDay()
+        {
+            DateTime start = new DateTime(1995, 1, 1);
+            int range = (DateTime.Now - start).Days;
+            return start.AddDays(gen.Next(range));
+        }
 
-		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.UseSqlite(Configuration.GetConnectionString("CallsDB"));
-		}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite(Configuration.GetConnectionString("CallsDB"));
+        }
 
-		protected override void OnModelCreating(ModelBuilder modelBuilder)
-		{
-			modelBuilder.Entity<Call>()
-				.ToTable("Calls");
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Call>()
+                .ToTable("Calls");
 
-			modelBuilder.Entity<Call>()
-				.HasData(
+            modelBuilder.Entity<Call>()
+                .HasData(
 new Call { Id = 1, Time = RandomDay(), Position = 141, Address = "16 Barby Park", PdSignal = "51", FdSignal = "44", Notes = "Polarised needs-based policy", Incident = 306876 },
 new Call { Id = 2, Time = RandomDay(), Position = 114, Address = "0790 Elmside Crossing", PdSignal = "41", FdSignal = "44", Notes = "Up-sized web-enabled instruction set", Incident = 733328 },
 new Call { Id = 3, Time = RandomDay(), Position = 115, Address = "220 Prentice Avenue", PdSignal = "54", FdSignal = "42", Notes = "Persistent directional attitude", Incident = 365002 },
@@ -132,10 +132,10 @@ new Call { Id = 99, Time = RandomDay(), Position = 126, Address = "2159 Cordelia
 new Call { Id = 100, Time = RandomDay(), Position = 123, Address = "05582 Larry Hill", PdSignal = "53", FdSignal = "49", Notes = "Re-engineered heuristic approach", Incident = 625218 }
 
 
-				);
-		}
+                );
+        }
 
-		public DbSet<Call> Calls { get; set; }
+        public DbSet<Call> Calls { get; set; }
 
-	}
+    }
 }
